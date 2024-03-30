@@ -443,6 +443,28 @@ class _HomePageState extends State<HomePage> {
                                 'Sub total',
                                 style: TextStyle(color: AppColors.grey),
                               ),
+                              BlocBuilder<CheckoutBloc, CheckoutState>(
+                                builder: (context, state) {
+                                  final price = state.maybeWhen(
+                                      orElse: () => 0,
+                                      loaded: (products) {
+                                        if(products.isEmpty) {
+                                          return 0;
+                                        }
+                                        return products
+                                            .map((e) =>
+                                        e.product.price!.toIntegerFromText * e.quantity)
+                                            .reduce((value, element) => value + element);
+                                      });
+                                  return Text(
+                                    price.currencyFormatRp,
+                                    style: const TextStyle(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  );
+                                },
+                              ),
                             ],
                           ),
                           const SpaceHeight(100.0),

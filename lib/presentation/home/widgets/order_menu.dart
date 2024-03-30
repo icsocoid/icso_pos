@@ -44,7 +44,7 @@ class OrderMenu extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       )),
                 ),
-                subtitle: Text('100'),
+                subtitle: Text(data.product.price!.toIntegerFromText.currencyFormatRp),
               ),
             ),
             // SizedBox(
@@ -117,7 +117,7 @@ class OrderMenu extends StatelessWidget {
             SizedBox(
               width: 80.0,
               child: Text(
-                (100 * data.quantity).currencyFormatRp,
+                (data.product.price!.toIntegerFromText * data.quantity).currencyFormatRp,
                 textAlign: TextAlign.right,
                 style: const TextStyle(
                   color: AppColors.primary,
